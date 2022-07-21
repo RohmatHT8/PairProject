@@ -22,6 +22,11 @@ module.exports = (sequelize, DataTypes) => {
     UserId: DataTypes.INTEGER,
     CategoryId: DataTypes.INTEGER
   }, {
+    hooks:{
+      beforeCreate(instance,options){
+        instance.like = 0
+      }
+    },
     sequelize,
     modelName: 'Post',
   });

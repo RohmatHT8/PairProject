@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Post)
       User.hasOne(models.Profile)
     }
+    fullName(){
+      return `${this.firstName} ${this.lastName}`
+    }
+    
   }
   User.init({
     userName: {

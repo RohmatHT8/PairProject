@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Profile.belongsTo(models.User)
     }
+    get formatDate(){
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      return this.dateOfBirth.toLocaleDateString('id-ID', options)
+    }
   }
   Profile.init({
     displayName: DataTypes.STRING,
