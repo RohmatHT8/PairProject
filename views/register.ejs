@@ -12,6 +12,13 @@
    
          <div class="container col-6 mt-5 conten-form p-5">
              <h1 class="text-center">Form Registrasi</h1>
+             <% if(errors) {%>
+              <div class="p-2 rounded-1" style="color:rgb(249, 12, 12); background-color: rgb(255, 195, 195);">
+                <% errors.split(',').forEach(el => {%>
+                   <div ><%= el %> </div>
+                <% }) %> 
+              </div>
+             <% } %> 
              <form action="/register" method="post">
                 <div class="row">
                     <div class="mb-3 col">

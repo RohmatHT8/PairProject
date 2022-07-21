@@ -24,7 +24,21 @@ class UserController {
     static homeLoggedIn(req, res) {
         const {sort, Search } = req.query
         const userId = req.session.userId
-        console.log(userId)
+
+        let where = {}
+        if(Search){
+            where = {
+                title : {
+                    [Op.iLike]: `%${Search}%`
+                }
+            }
+        }
+        if(sort){
+            where = {
+                CategoryId : sort
+            }
+        }
+
         let data = {}
         User.findByPk(userId,{include:Profile})
          .then(user => {
@@ -33,12 +47,8 @@ class UserController {
         })
         .then(category => {
             data.category = category
-            return Post.findAll({include:User,
-                where: {
-                    title : {
-                        [Op.iLike]:'%bai%'
-                    }
-                }
+            return Post.findAll({include:[User, Category],
+                where
             })
         })
         .then(post => {
@@ -66,7 +76,8 @@ class UserController {
     }
 
     static registerForm(req, res) {
-        res.render('register')
+        const {errors} = req.query
+        res.render('register', {errors})
     }
 
     static postRegister(req, res) {
@@ -77,12 +88,18 @@ class UserController {
                 res.redirect('/login')
             })
             .catch(err => {
-                res.send(err)
+                const errors = err.errors.map(el => el.message)
+                if(err.name === "SequelizeValidationError"){
+                    res.redirect(`/register?errors=${errors}`)
+                }else{
+                    res.send(err)
+                }
             })
     }
 
     static formLogin(req, res) {
-        res.render('login')
+        const {errors} = req.query
+        res.render('login', {errors})
     }
 
     static isLogin(req, res) {
@@ -97,11 +114,11 @@ class UserController {
                         return res.redirect('/home');
                     } else {
                         const error = `invalid username/password`
-                        return res.redirect(`/login?error=${error}`)
+                        return res.redirect(`/login?errors=${error}`)
                     }
                 } else {
                     const error = `invalid username/password`
-                    return res.redirect(`/login?error=${error}`)
+                    return res.redirect(`/login?errors=${error}`)
                 }
             })
     }

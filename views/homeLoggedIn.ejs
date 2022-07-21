@@ -3,7 +3,7 @@
 <main>
     <div class="filter">
       <%category.forEach(el => {%>
-        <a href="/home?sort=<%=el.name%>" class="btn btn-warning rounded-1 mt-3 mb-3 pt-0 pb-0"><%=el.name%></a>
+        <a href="/home?sort=<%=el.id%>" class="btn btn-warning rounded-1 mt-3 mb-3 pt-0 pb-0"><%=el.name%></a>
       <%});%>
 
     </div>
@@ -25,9 +25,10 @@
                         <img src="<%= el.imageUrl %>" alt="" width="130%">
                     </div>
                     <div class="card-body">                     
-                        <h5 class="card-title col-10"><%= el.title %> </h5>
-                        <P>Post By <b><i> <%=el.User.fullName()%> </i></b></P>
-                      <p class="card-text"><%= el.description %> </p>
+                        <h4 class="card-title"><%= el.title %> </h4>
+                        <P>Post By <b><i> <%=el.User.fullName()%> </i></b> 
+                          <br> <span style="font-size:10px;">Category : <b><%= el.Category.name %></b> </span></P>
+                      <p class=""><%= el.description %> </p>
                       <p><a href="/like/<%= el.id %>"><i class="fa fa-heart"></i></a> <%= el.like %>  Likes</p>
                     </div>
                   </div> <!-- end carde -->
