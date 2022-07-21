@@ -1,5 +1,6 @@
 const {Profile,User,Category, Post} = require("../models");
 const bcrypt = require('bcryptjs');
+const publishedAt =require('../helper/helper');
 
 class UserController {
 
@@ -88,9 +89,9 @@ class UserController {
     }
 
     static editProfile(req, res) {
-        const {id} = req.params
+        const userId = req.session.userId
         console.log(req.params);
-        Profile.findOne({include:User},{where:{UserId:+id}})
+        Profile.findOne({include:User},{where:{UserId:userId}})
         .then(data=>{
             // res.send([data])
             res.render('editProfile',{data})
@@ -103,10 +104,10 @@ class UserController {
     static postEditProfile(req, res) {
         const photo = req.file.filename
         const { displayName, dateOfBirth } = req.body
-        const {id} = req.params
+        const userId = req.session.userId
         // console.log(req.params.id,photo);
         // res.send(req.body)
-        Profile.update({displayName, dateOfBirth, profilePicture:photo},{where:{UserId:+id}})
+        Profile.update({displayName, dateOfBirth, profilePicture:photo},{where:{UserId:userId}})
         .then(()=>{
             res.redirect('/')
         })
@@ -116,10 +117,10 @@ class UserController {
     }
 
     static formAddPost(req, res) {
-        const {id} = req.params
+        const userId = req.session.userId
 
         let data;
-        Profile.findOne({include:User},{where:{UserId:+id}})
+        Profile.findOne({include:User},{where:{UserId:userId}})
         .then(profile=>{
             data=profile
             return Category.findAll()
@@ -145,16 +146,66 @@ class UserController {
     }
 
     static managePost(req, res) {
-        res.render('managePost')
+        const userId = req.session.userId
+        const options = {where:{id:userId}}
+        
+
+        let data;
+        Profile.findOne(options)
+        .then(profile=>{
+            data=profile
+            return Post.findAll({include:Category},options)
+        })
+        .then(post=>{
+            res.render('managePost',{data,post,publishedAt})
+        })
+
+    }
+
+    static editPostForm(req,res){
+        const userId = req.session.userId
+        const {postId} = req.params
+
+        let data
+        Profile.findOne({include:User},{where:{UserId:userId}})
+        .then(profile=>{
+            data.profile=profile
+            console.log(data.profile);
+            return Post.findOne({where:{id:postId}})
+        })
+        .then(post=>{
+            data.post=post
+            console.log(data);
+            return Category.findAll()
+        })
+        .then(category=>{
+            res.send(category)
+            // res.render('editPost',{data,category})
+        })
+        .catch(err=>{
+            res.send(err)
+        })
+    }
+
+    static editPostPost(req,res){
+        const userId = req.session.userId
+        const {title,description,CategoryId} = req.body
+
+        Post.update({title,description,CategoryId,UserId:userId})
+        .then(()=>{
+            res.redirect('/managePost')
+        })
+        .catch(err=>{
+            res.send(err)
+        })
     }
 
     static deletePost(req,res){
-        const postId = req.params.storeId
-        const id = req.params.id
+        const postId = req.params.postId
 
         Post.destroy({where:{id:+postId}})
         .then(()=>{
-            res.redirect('')
+            res.redirect('/managePost')
         })
         .catch(err=>{
             res.send(err)

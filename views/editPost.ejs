@@ -6,7 +6,7 @@
           <% const arr = ['Art'] %> 
           <!-- left side bar -->
             <div class="col">
-                <%- include('./partials/sidebar') %> 
+                <%- include('./partials/sidebar',data.profile) %> 
             </div>
           <!-- end left side bar -->
 
@@ -15,29 +15,27 @@
                 <div class="mt-5" style="width: 80%;">
                     
                  <h1>Add Post</h1>
-                  <form action="/addPost" method="post" enctype="multipart/form-data">
-                                     
+                  <form action="/addPost/<%=data.post.User.id%>" method="post" enctype="multipart/form-data">  
                     <div class="mb-3 col">
                       <label for="title" class="form-label">Title</label>
-                      <input type="text" class="form-control" id="title" name="title">
+                      <input type="text" class="form-control" id="title" name="title" value="<%=data.post.title%>">
                     </div>
                     
                     <label for="CategoryId" class="form-label">Category</label>
                     <select class="form-select mb-3" name="CategoryId" id="CategoryId">
                         <option selected disabled>Select a Category...</option>
                         <%category.forEach(el=>{%>
-                        <option value="<%=el.id%>"><%=el.name%></option>
+                            <%if(data.post.CategoryId===el.id){%>
+                        <option selected value="<%=el.id%>"><%=el.name%></option>
+                        <%}else{%>
+                            <option value="<%=el.id%>"><%=el.name%></option>
+                            <%}%>
                         <%})%>
                       </select>
 
                     <label for="description">Description</label>
                     <div class="form">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="description" name="description"></textarea>
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="photo" class="form-label">Photo</label>
-                      <input type="file" class="form-control" id="photo" name="photo">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="description" name="description"><%=data.post.description%></textarea>
                     </div>
                        
                     <button type="submit" class="btn btn-warning">Post</button>

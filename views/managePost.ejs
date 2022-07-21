@@ -3,10 +3,9 @@
 <main>
     <div class="container-fluid">
         <div class="row">
-          <% const arr = ['Art'] %> 
           <!-- left side bar -->
             <div class="col">
-                <%- include('./partials/sidebar') %> 
+                <%- include('./partials/sidebar',data) %> 
             </div>
           <!-- end left side bar -->
 
@@ -28,18 +27,20 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td>1</td>
+                        <%post.forEach((el,index)=>{%>
+                        <td><%=index+1%></td>
                         <td>
-                            <img src="/pp.jpg" alt="" width="40px">
+                            <img src="<%=el.imageUrl%>" alt="<%=el.title%>" width="40px">
                         </td>
-                        <td>Last Namos</td>
-                        <td>Nature</td>
-                        <td>2 Hours Ago</td>
-                        <td>10</td>
+                        <td><%=el.title%></td>
+                        <td><%=el.Category.name%></td>
+                        <td><%=publishedAt(el.createdAt)%></td>
+                        <td><%=el.like%></td>
                         <td>
-                            <a href="" class="btn btn-warning">Edit Post</a>
-                            <a href="" class="btn btn-danger">Delete</a>
+                            <a href="/managePost/edit/<%=el.id%>" class="btn btn-warning">Edit Post</a>
+                            <a href="/managePost/delete/<%=el.id%>" class="btn btn-danger">Delete</a>
                         </td>
+                        <%});%>
                       </tr>
                     </tbody>
                   </table>
