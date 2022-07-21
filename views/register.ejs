@@ -1,0 +1,52 @@
+<%- include('./partials/header', {title: 'Halaman Form Register'}) %>
+
+<!-- 
+    email
+    username
+    password
+    firstname
+    lastname
+ -->
+
+ <div class="form-background">
+   
+         <div class="container col-6 mt-5 conten-form p-5">
+             <h1 class="text-center">Form Registrasi</h1>
+             <form action="/register" method="post">
+                <div class="row">
+                    <div class="mb-3 col">
+                      <label for="firstName" class="form-label">First Name</label>
+                      <input type="text" class="form-control" id="firstName" name="firstName">
+                    </div>
+    
+                    <div class="mb-3 col">
+                      <label for="lastName" class="form-label">Last Name</label>
+                      <input type="text" class="form-control" id="lastName" name="lastName">
+                    </div>
+                </div>
+                
+                <div class="mb-3 col">
+                  <label for="userName" class="form-label">User Name</label>
+                  <input type="text" class="form-control" id="userName" name="userName">
+                </div>
+
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" name="email">
+                </div>
+
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" name="password">
+                </div>
+                
+                <button type="submit" class="btn btn-warning">Submit</button>
+              </form>
+              <br>
+              <p>have account ? login <a href="/login">here</a></p>
+         </div>
+  
+ </div> 
+
+<%- include('./partials/footer') %> 
+

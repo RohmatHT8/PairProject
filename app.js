@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000
 const path = require('path')
+const route = require('./routes')
+
 
 app.set('views', path.join(__dirname, 'views'))
 
@@ -11,9 +13,7 @@ app.use(express.urlencoded({extended:true}))
 
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/', (req, res) => {
-    res.render('home')
-})
+app.use('/', route)
 
 
 
