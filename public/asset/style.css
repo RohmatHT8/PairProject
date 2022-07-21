@@ -1,5 +1,5 @@
 .sidebar {
-    background-color:#ddd;
+    background-color:#f5eeda;
     position:fixed;
     height:100vh;
     width:350px;
@@ -24,4 +24,12 @@
 
 .centerbar {
     padding-left:160px;
+}
+
+i {
+    color:rgba(255, 44, 44, 0.5);
+}
+
+i:hover {
+    color:rgba(255, 44, 44);
 }
