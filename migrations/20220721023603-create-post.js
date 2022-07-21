@@ -1,21 +1,24 @@
 'use strict';
 module.exports = {
    up(queryInterface, Sequelize) {
-     return queryInterface.createTable('Profiles', {
+    return queryInterface.createTable('Posts', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      displayName: {
+      title: {
         type: Sequelize.STRING
       },
-      profilePicture: {
+      description: {
         type: Sequelize.STRING
       },
-      dateOfBirth: {
-        type: Sequelize.DATE
+      like: {
+        type: Sequelize.INTEGER
+      },
+      imageUrl: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -28,6 +31,6 @@ module.exports = {
     });
   },
    down(queryInterface, Sequelize) {
-     return queryInterface.dropTable('Profiles');
+    return queryInterface.dropTable('Posts');
   }
 };
