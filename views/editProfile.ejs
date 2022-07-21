@@ -1,0 +1,59 @@
+<%- include('./partials/header', {title: "Halaman Utama 8ookArt"}) %> 
+<%- include('./partials/nav') %> 
+<main>
+    <div class="container-fluid">
+        <div class="row">
+          <% const arr = ['Art'] %> 
+          <!-- left side bar -->
+            <div class="col">
+                <div class="sidebar">
+                  <h1>Wellcome To 8ook<span style="color:#ff2525">Art</span>  Social Media</h1>
+                  <% if(arr.length == 0){ %>
+                    <p>Login to be part of us!</p>
+                    <a href="/login" class="btn btn-warning">Login</a>
+                  <% } else { %>
+                    <img src="/pp.jpg" alt="profile picture" width="40%" class="rounded-circle">
+                    <br>
+                    <h4>Rohmat Hidayattullah</h4>
+                    <div>19 Oktober 1997</div>
+                    <div>Jumlah Postingan : 0</div>
+                    <a href="/profile">Edit Profile</a>
+                    <a href="/addPost">Add Post</a>
+                  <% } %> 
+                </div>
+            </div>
+          <!-- end left side bar -->
+
+          <!-- center bar -->
+            <div class="col-6 ms-5">
+                <!-- card -->
+                <div class="mt-5" style="width: 80%;">
+                  <form action="/profile" method="post" enctype="multipart/form-data">
+                                     
+                    <div class="mb-3 col">
+                      <label for="userName" class="form-label">Display Name</label>
+                      <input type="text" class="form-control" id="userName" name="displayName">
+                    </div>
+    
+                    <div class="mb-3">
+                      <label for="photo" class="form-label">Photo</label>
+                      <input type="file" class="form-control" id="photo" name="photo">
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="dateOfBirth" class="form-label">Date Of Birth</label>
+                      <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth">
+                    </div>
+                        
+                    <button type="submit" class="btn btn-warning">Submit</button>
+                  </form>
+                  </div> <!-- end carde -->
+            </div>
+            <!-- end center bar -->
+            <div class="col">
+            </div>
+        </div>
+    </div>
+  </main>
+
+<%- include('./partials/footer') %> 
