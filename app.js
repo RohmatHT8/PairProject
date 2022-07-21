@@ -18,3 +18,4 @@ app.get('/', (req, res) => {
 
 
 app.listen(port, () => console.log(`aplikasi berjalan di port ${port}`))
+
