@@ -1,45 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>uji coba</title>
-  <meta content="MUKTI WIJAYA FIBRETECH FRP TANK SPT TANK CYLINDERTANK PENAMPUNG LIMBAH DOMESTIK" name="description">
-  <meta content="FIBRETECH FIBERGLASS MUKTI WIJAYA FIBERTECH" name="keywords">
-
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-  
-  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="/asset/style.css">
-
-</head>
-
- <nav class="navbar navbar-dark bg-dark sticky-top">
-    <div class="container col-6">
-      <div>
-        <img src="./pp.jpg" alt="profile picture" width="40px" class="rounded-circle me-2">
-        <a class="navbar-brand">navbar</a>
-      </div>
-      <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-warning" type="submit">Search</button>
-       </form>
-       <a href="#" style="color:white; text-decoration:none;">Login</a>
-    </div>
-</nav>
-
+<%- include('./partials/header', {title: "Halaman Utama 8ookArt"}) %> 
 <main>
     <div class="filter">
-        <a href="" class="btn btn-warning rounded-1 mt-3 mb-3 pt-0 pb-0">filter</a>
-        <a href="" class="btn btn-warning rounded-1 mt-3 mb-3 pt-0 pb-0">filter</a>
-        <a href="" class="btn btn-warning rounded-1 mt-3 mb-3 pt-0 pb-0">filter</a>
+        <a href="" class="btn btn-warning rounded-1 mt-3 mb-3 pt-0 pb-0">Nature</a>
+        <a href="" class="btn btn-warning rounded-1 mt-3 mb-3 pt-0 pb-0">Urban</a>
+        <a href="" class="btn btn-warning rounded-1 mt-3 mb-3 pt-0 pb-0">Cartoon</a>
+        <a href="" class="btn btn-warning rounded-1 mt-3 mb-3 pt-0 pb-0">Potrait</a>
+        <a href="" class="btn btn-warning rounded-1 mt-3 mb-3 pt-0 pb-0">Abstract</a>
     </div>
     <div class="container-fluid">
         <div class="row">
@@ -48,7 +14,7 @@
                     <h1>ini sidebar</h1>
                 </div>
             </div>
-            <div class="col-6 mx-auto">
+            <div class="col-6 centerbar">
                 <!-- card -->
                 <div class="card mt-5" style="width: 80%;">
                     <div class="background-card">
@@ -101,8 +67,4 @@
     </div>
   </main>
 
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-</body>
-
-</html>
+<%- include('./partials/footer') %> 
