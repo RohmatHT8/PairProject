@@ -27,9 +27,21 @@ class UserController {
     static postEditProfile(req, res) {
         const photo = req.file.filename 
         const {displayName, dateOfBirth} = req.body
-        console.log({displayName, dateOfBirth, photo})
         res.send(req.body)
     }
+
+    static formAddPost(req, res) {
+        res.render('addPost')
+    }
+
+    static addPost(req, res) {
+        res.send(req.body)
+    }
+
+    static menagePost (req, res) {
+        res.render('menagePost')
+    }
+
 
 }
 module.exports = UserController

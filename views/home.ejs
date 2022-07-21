@@ -10,33 +10,17 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-          <% const arr = ['art'] %>
+          
           <!-- left side bar -->
             <div class="col">
-                <div class="sidebar">
-                  <h1>Wellcome To 8ook<span style="color:#ff2525">Art</span>  Social Media</h1>
-                  <% if(arr.length == 0){ %>
-                    <p>Login to be part of us!</p>
-                    <a href="/login" class="btn btn-warning">Login</a>
-                  <% } else { %>
-                    <div class="frame-photo mx-auto">
-                      <img src="/1658377943753.jpeg" alt="profile picture" width="100%">
-                    </div>
-                    <br>
-                    <h4>Rohmat Hidayattullah</h4>
-                    <div>19 Oktober 1997</div>
-                    <div>Jumlah Postingan : 0</div>
-                    <a href="/profile">Edit Profile</a>
-                    <a href="/addPost">Add Post</a>
-                  <% } %> 
-                </div>
+                <%- include('./partials/sidebar')  %> 
             </div>
           <!-- end left side bar -->
 
           <!-- center bar -->
-            <div class="col-6 centerbar">
+            <div class="col-6 centerbar mt-5">
                 <!-- card -->
-                <div class="card mt-5" style="width: 80%;">                    
+                <div class="card mb-3" style="width: 80%;">                    
                     <div class="background-card">
                         <img src="/1.jpg" alt="">
                     </div>

@@ -18,7 +18,10 @@ route.get('/register', UserController.registerForm);
 route.post('/register', UserController.postRegister)
 route.get('/login', UserController.formLogin)
 route.post('/login', UserController.isLogin)
-route.get('/profile', UserController.editProfile)
-route.post('/profile', upload.single('photo'), UserController.postEditProfile)
+route.get('/profile/:id', UserController.editProfile)
+route.post('/profile/:id', upload.single('photo'), UserController.postEditProfile)
+route.get('/addPost/:id', UserController.formAddPost)
+route.post('/addPost/:id', UserController.addPost)
+route.get('/managePost/:id', UserController.menagePost)
 
 module.exports = route

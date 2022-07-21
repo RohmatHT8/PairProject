@@ -1,0 +1,55 @@
+<%- include('./partials/header', {title: "Halaman Utama 8ookArt"}) %> 
+<%- include('./partials/nav') %> 
+<main>
+    <div class="container-fluid">
+        <div class="row">
+          <% const arr = ['Art'] %> 
+          <!-- left side bar -->
+            <div class="col">
+                <%- include('./partials/sidebar') %> 
+            </div>
+          <!-- end left side bar -->
+
+          <!-- center bar -->
+            <div class="col-6 ms-5">
+                <div class="mt-5" style="width: 80%;">
+                    
+                 <h1>Add Post</h1>
+                  <form action="/profile" method="post" enctype="multipart/form-data">
+                                     
+                    <div class="mb-3 col">
+                      <label for="title" class="form-label">Title</label>
+                      <input type="text" class="form-control" id="title" name="title">
+                    </div>
+                    
+                    <label for="category" class="form-label">Category</label>
+                    <select class="form-select mb-3" name="category" id="category">
+                        <option selected disabled>Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+
+                    <label for="description">Description</label>
+                    <div class="form">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="description" name="description"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                      <label for="photo" class="form-label">Photo</label>
+                      <input type="file" class="form-control" id="photo" name="photo">
+                    </div>
+                       
+                    <button type="submit" class="btn btn-warning">Post</button>
+                    <button type="submit" class="btn btn-danger">Cancel</button>
+                  </form>
+                  </div>
+            </div>
+            <!-- end center bar -->
+            <div class="col">
+            </div>
+        </div>
+    </div>
+  </main>
+
+<%- include('./partials/footer') %> 

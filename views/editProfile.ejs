@@ -6,28 +6,14 @@
           <% const arr = ['Art'] %> 
           <!-- left side bar -->
             <div class="col">
-                <div class="sidebar">
-                  <h1>Wellcome To 8ook<span style="color:#ff2525">Art</span>  Social Media</h1>
-                  <% if(arr.length == 0){ %>
-                    <p>Login to be part of us!</p>
-                    <a href="/login" class="btn btn-warning">Login</a>
-                  <% } else { %>
-                    <img src="/pp.jpg" alt="profile picture" width="40%" class="rounded-circle">
-                    <br>
-                    <h4>Rohmat Hidayattullah</h4>
-                    <div>19 Oktober 1997</div>
-                    <div>Jumlah Postingan : 0</div>
-                    <a href="/profile">Edit Profile</a>
-                    <a href="/addPost">Add Post</a>
-                  <% } %> 
-                </div>
+                <%- include('./partials/sidebar') %> 
             </div>
           <!-- end left side bar -->
 
           <!-- center bar -->
             <div class="col-6 ms-5">
-                <!-- card -->
                 <div class="mt-5" style="width: 80%;">
+                  <h1>Edit Profile</h1>
                   <form action="/profile" method="post" enctype="multipart/form-data">
                                      
                     <div class="mb-3 col">
@@ -47,7 +33,7 @@
                         
                     <button type="submit" class="btn btn-warning">Submit</button>
                   </form>
-                  </div> <!-- end carde -->
+                  </div>
             </div>
             <!-- end center bar -->
             <div class="col">
