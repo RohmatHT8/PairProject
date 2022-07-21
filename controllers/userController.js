@@ -1,41 +1,68 @@
 const {Profile,User,Category, Post} = require("../models");
 const bcrypt = require('bcryptjs');
+const getTime = require('../helper/helper')
+const {Op} = require('sequelize')
 
 class UserController {
 
     static home(req,res){
-
-        let values
+        let data = {};
         Post.findAll({include:User})
-        .then(post=>{
-            values =post
+         .then(post => {
+            data.post = post
             return Category.findAll()
-        })
-        .then(category=>{
-            res.send(values)
-            // res.render('home',{values,category})
-        })
-        .catch(err=>{
+         })
+         .then(category => {
+            data.category = category
+            res.render('home', data)
+         })
+         .catch(err => {
             res.send(err)
-        })
+         })
     }
 
     static homeLoggedIn(req, res) {
-        const{id} = req.params
-
-        let data;
-        Profile.findOne({include:User},{where:{UserId:+id}})
-        .then(profile=>{
-            data=profile
-            return Category.findAll()
+        const {sort, Search } = req.query
+        const userId = req.session.userId
+        console.log(userId)
+        let data = {}
+        User.findByPk(userId,{include:Profile})
+         .then(user => {
+           data.user = user
+           return Category.findAll()
         })
-        .then(category=>{
-            // res.send(data)
-            res.render('homeLoggedIn',{data,category})
+        .then(category => {
+            data.category = category
+            return Post.findAll({include:User,
+                where: {
+                    title : {
+                        [Op.iLike]:'%bai%'
+                    }
+                }
+            })
         })
-        .catch(err=>{
+        .then(post => {
+            data.post = post
+            res.render('homeLoggedIn', data)
+        })
+        .catch(err => {
             res.send(err)
-        })
+         })
+    }
+
+    static like (req, res) {
+      const {postId} = req.params
+      Post.increment({like: 1}, {
+        where : {
+            id:postId
+        }
+      })
+      .then(() => {
+        res.redirect('/home')
+      })
+      .catch(err => {
+        res.send(err)
+      })
     }
 
     static registerForm(req, res) {
@@ -87,13 +114,35 @@ class UserController {
         })
     }
 
+    static addProfile(req, res) {
+        const {id} = req.params
+        User.findByPk(id, {include:Profile})
+        .then(user=>{
+            res.render('addProfile',{user})
+        })
+        .catch(err=>{
+            res.send(err)
+        })
+    }
+
+    static postAddProfile(req, res) {
+        const photo = req.file.filename
+        const {id} = req.params
+        const { displayName, dateOfBirth } = req.body
+        Profile.create({ displayName, dateOfBirth, profilePicture:photo, UserId:id})
+          .then(()=>{
+            res.redirect('/home')
+          })
+          .catch(err => {
+            res.send(err)
+          })
+    }
+
     static editProfile(req, res) {
         const {id} = req.params
-        console.log(req.params);
-        Profile.findOne({include:User},{where:{UserId:+id}})
-        .then(data=>{
-            // res.send([data])
-            res.render('editProfile',{data})
+        User.findByPk(id, {include:Profile})
+        .then(user=>{
+            res.render('editProfile',{user})
         })
         .catch(err=>{
             res.send(err)
@@ -104,11 +153,9 @@ class UserController {
         const photo = req.file.filename
         const { displayName, dateOfBirth } = req.body
         const {id} = req.params
-        // console.log(req.params.id,photo);
-        // res.send(req.body)
         Profile.update({displayName, dateOfBirth, profilePicture:photo},{where:{UserId:+id}})
         .then(()=>{
-            res.redirect('/')
+            res.redirect('/home')
         })
         .catch(err=>{
             res.send(err)
@@ -117,16 +164,15 @@ class UserController {
 
     static formAddPost(req, res) {
         const {id} = req.params
-
-        let data;
-        Profile.findOne({include:User},{where:{UserId:+id}})
-        .then(profile=>{
-            data=profile
+        let data = {};
+        User.findByPk(id, {include:Profile})
+        .then(user => {
+            data.user = user
             return Category.findAll()
         })
-        .then(category=>{ 
-            // res.send(data.User)
-            res.render('addPost', {data,category})
+        .then(category=> {
+            data.category = category
+            res.render('addPost', data)
         })
         .catch(err=>{
             res.send(err)
@@ -139,22 +185,83 @@ class UserController {
         const {title,description,CategoryId} = req.body
         
         Post.create({title,description,CategoryId,imageUrl:photo,UserId:userId})
-        .then(()=>{
+        .then(() => {
             res.redirect('/home')
+        })
+        .catch(err => {
+            res.send(err)
         })
     }
 
     static managePost(req, res) {
-        res.render('managePost')
+        const {id} = req.params
+        let data = {};
+        User.findByPk(id, {include:Profile})
+            .then(user => {
+              data.user = user
+              return Post.findAll({include : Category,
+                where: {
+                UserId: {
+                   [Op.eq] : +id
+                 }
+                }
+              })
+            })
+            .then(post => {
+              data.post = post
+              res.render('managePost', {post:data.post, user:data.user, getTime})
+            })
+            .catch(err => {
+                res.send(err)
+            })
+    }
+
+    static formEditPost (req, res) {
+        const {id} = req.params
+        const {postId} = req.params
+        let data = {};
+        User.findByPk(id, {include:Profile})
+        .then(user => {
+            data.user = user
+            return Category.findAll()
+        })
+        .then(category=> {
+            data.category = category
+            return Post.findByPk(postId, {include:Category})
+        })
+        .then(post => {
+            data.post = post
+            res.render('editPost', data)
+        })
+        .catch(err=>{
+            res.send(err)
+        })
+    } 
+
+
+    static postEditPost (req, res) {
+        const {postId, id} = req.params
+        const {title, CategoryId, description} = req.body
+        Post.update({title, CategoryId, description}, {
+            where : {
+                id:postId
+            }
+        })
+        .then(() => {
+            res.redirect(`/managePost/${id}`)
+        })
+        .catch(err => {
+            res.send(err)
+        })
     }
 
     static deletePost(req,res){
-        const postId = req.params.storeId
+        const postId = req.params.postId
         const id = req.params.id
 
         Post.destroy({where:{id:+postId}})
         .then(()=>{
-            res.redirect('')
+            res.redirect(`/managePost/${id}`)
         })
         .catch(err=>{
             res.send(err)

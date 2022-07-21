@@ -6,7 +6,7 @@
           <% const arr = ['Art'] %> 
           <!-- left side bar -->
             <div class="col">
-                <%- include('./partials/sidebar') %> 
+                <%- include('./partials/sidebar', user) %> 
             </div>
           <!-- end left side bar -->
 
@@ -27,20 +27,22 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>
-                            <img src="/pp.jpg" alt="" width="40px">
-                        </td>
-                        <td>Last Namos</td>
-                        <td>Nature</td>
-                        <td>2 Hours Ago</td>
-                        <td>10</td>
-                        <td>
-                            <a href="" class="btn btn-warning">Edit Post</a>
-                            <a href="" class="btn btn-danger">Delete</a>
-                        </td>
-                      </tr>
+                      <% post.forEach((el, i) => { %>
+                        <tr>
+                          <td><%= i + 1 %></td>
+                          <td>
+                              <img src="/<%= el.imageUrl%>" alt="" width="50px">
+                          </td>
+                          <td><%= el.title %> </td>
+                          <td><%= el.Category.name%></td>
+                          <td><%=getTime(el.createdAt)%></td>
+                          <td><% el.like %> </td>
+                          <td>
+                              <a href="/managePost/<%= el.User.id %>/edit/<%= el.id %>" class="btn btn-warning">Edit Post</a>
+                              <a href="/managePost/<%= el.User.id %>/delete/<%= el.id %>" class="btn btn-danger">Delete</a>
+                          </td>
+                        </tr>
+                      <% }) %> 
                     </tbody>
                   </table>
                 </div>

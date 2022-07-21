@@ -1,19 +1,26 @@
 <div class="sidebar">
     <h1>Wellcome To 8ook<span style="color:#ff2525">Art</span>  Social Media</h1>
-    <% if(!data){ %>
-      <p>DESKRIPSI WEBSITE INIIIIII</p>
-      <p>Login to be part of us!</p>
-      <a href="/login" class="btn btn-warning">Login</a>
+
+    <% if(!user.Profile){ %>
+        <p>Belum Ada Profile</p>
     <% } else { %>
       <div class="frame-photo mx-auto">
-        <img src="<%=data.profilePicture%>" alt="<%=data.User.fullName()%>" width="100%">
+        <img src="/<%=user.Profile.profilePicture%>" alt="<%=user.fullName()%>" width="100%">
       </div>
       <br>
-      <h4><%=data.User.fullName()%></h4>
-      <div><%=data.formatDate%></div>
+      <h4><%=user.fullName()%></h4>
+      <div><%=user.formatDate%></div>
       <div>Jumlah Postingan : 0</div>
-      <a href="/profile/<%=data.User.id%>">Edit Profile</a>
-      <a href="/addPost/<%=data.User.id%>">Add Post</a>
-      <p><a href="/managePost/<%=data.User.id%>">Manage Post</a></p>
-    <% } %> 
+      <% } %> 
+
+      <% if(!user.Profile){%>
+        <a href="/addProfile/<%=user.id%>">Add Profile</a>
+      <% } else { %>
+        <a href="/profile/<%=user.id%>">Edit Profile</a>
+      <% } %> 
+
+      <a href="/addPost/<%=user.id%>">Add Post</a>
+      <p><a href="/managePost/<%=user.id%>">Manage Post</a></p> 
+
+      <a href="/logout" class="btn btn-danger">Log Out</a>
   </div>

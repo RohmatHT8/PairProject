@@ -1,9 +1,9 @@
 <%- include('./partials/header', {title: "Halaman Utama 8ookArt"}) %> 
-<%- include('./partials/nav') %> 
+<%- include('./partials/nav', {user}) %> 
 <main>
     <div class="filter">
       <%category.forEach(el => {%>
-        <a href="/?sort=<%=el.name%>" class="btn btn-warning rounded-1 mt-3 mb-3 pt-0 pb-0"><%=el.name%></a>
+        <a href="/home?sort=<%=el.name%>" class="btn btn-warning rounded-1 mt-3 mb-3 pt-0 pb-0"><%=el.name%></a>
       <%});%>
 
     </div>
@@ -12,31 +12,26 @@
           
           <!-- left side bar -->
             <div class="col">
-              
-                <%- include('./partials/sidebar',data) %> 
+                <%- include('./partials/sidebar', user) %> 
             </div>
           <!-- end left side bar -->
 
           <!-- center bar -->
             <div class="col-6 centerbar mt-5">
+               <% post.forEach(el => { %>
                 <!-- card -->
                 <div class="card mb-3" style="width: 80%;">                    
                     <div class="background-card">
-                        <img src="/1.jpg" alt="">
+                        <img src="<%= el.imageUrl %>" alt="" width="130%">
                     </div>
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col">
-                          <div class="frame-photo-card ">
-                            <img src="/1658377943753.jpeg" alt="profile picture" width="100%">
-                          </div>
-                        </div>
-                        <h5 class="card-title col-10">Rohmat Hidayattullah</h5>
-                      </div>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <p><a href="#"><i class="fa fa-heart"></i></a>   0 Likes</p>
+                    <div class="card-body">                     
+                        <h5 class="card-title col-10"><%= el.title %> </h5>
+                        <P>Post By <b><i> <%=el.User.fullName()%> </i></b></P>
+                      <p class="card-text"><%= el.description %> </p>
+                      <p><a href="/like/<%= el.id %>"><i class="fa fa-heart"></i></a> <%= el.like %>  Likes</p>
                     </div>
                   </div> <!-- end carde -->
+               <% }) %> 
             </div>
             <!-- end center bar -->
             <div class="col">

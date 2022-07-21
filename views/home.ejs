@@ -27,22 +27,15 @@
           <!-- center bar -->
             <div class="col-6 centerbar mt-5">
                 <!-- card -->
-                <%values.forEach(el => {%>
+                <%post.forEach(el => {%>
                 <div class="card mb-3" style="width: 80%;">                    
                     <div class="background-card">
-                        <img src="<%=el.imageUrl%>" alt="">
+                        <img src="<%=el.imageUrl%>" alt="" width="130%">
                     </div>
                     <div class="card-body">
-                      <div class="row">
-                        <div class="col">
-                          <div class="frame-photo-card ">
-                            <img src="" alt="<%=el.title%>" width="100%">
-                          </div>
-                        </div>
                         <h5 class="card-title col-10"><%=el.title%></h5>
-                      </div>
+                        <P>Post By <b><i> <%=el.User.fullName()%> </i></b></P>
                       <p class="card-text"><%=el.description%></p>
-                      <p><a href="#"><i class="fa fa-heart"></i></a><%=el.like%> Likes</p>
                     </div>
                   </div>
                 <%});%>

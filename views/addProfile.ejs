@@ -1,0 +1,42 @@
+<%- include('./partials/header', {title: "Halaman Utama 8ookArt"}) %> 
+<%- include('./partials/nav') %> 
+<main>
+    <div class="container-fluid">
+        <div class="row">
+          <!-- left side bar -->
+            <div class="col">
+                <%- include('./partials/sidebar', user) %> 
+            </div>
+          <!-- end left side bar -->
+
+          <!-- center bar -->
+            <div class="col-6 ms-5">
+                <div class="mt-5" style="width: 80%;">
+                  <h1>Add Profile</h1>
+                  <form action="/addProfile/<%=user.id%>" method="post" enctype="multipart/form-data">
+                          <div class="mb-3 col">
+                            <label for="userName" class="form-label">Display Name</label>
+                            <input type="text" class="form-control" id="userName" name="displayName" >
+                          </div>
+          
+                          <div class="mb-3">
+                            <label for="photo" class="form-label">Photo</label>
+                            <input type="file" class="form-control" id="photo" name="photo">
+                          </div>
+      
+                          <div class="mb-3">
+                            <label for="dateOfBirth" class="form-label">Date Of Birth</label>
+                            <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth">
+                          </div>
+                    <button type="submit" class="btn btn-warning">Submit</button>
+                  </form>
+                  </div>
+            </div>
+            <!-- end center bar -->
+            <div class="col">
+            </div>
+        </div>
+    </div>
+  </main>
+
+<%- include('./partials/footer') %> 
