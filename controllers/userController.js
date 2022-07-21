@@ -27,6 +27,7 @@ class UserController {
                 if (user) {
                     const isValidPassword = bcrypt.compareSync(password, user.password)
                     if (isValidPassword) {
+                        req.session.userId = user.id
                         return res.redirect('/');
                     } else {
                         const error = `invalid username/password`
@@ -37,6 +38,15 @@ class UserController {
                     return res.redirect(`/login?error=${error}`)
                 }
             })
+    }
+    static logOut(req, res) {
+        req.session.destroy((err) => {
+            if (err) res.send(err)
+            else {
+                res.redirect('/login')
+            }
+        })
+
     }
 }
 module.exports = UserController
