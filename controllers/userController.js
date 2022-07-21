@@ -2,8 +2,11 @@ const { User } = require('../models');
 const bcrypt = require('bcryptjs');
 
 class UserController {
+    static home(req,res){
+        res.render('home')
+    }
     static registerForm(req, res) {
-        req.render('/register')
+        res.render('register')
     }
     static postRegister(req, res) {
         const { userName, password, firstName, lastName, email } = req.body
@@ -16,13 +19,13 @@ class UserController {
                 res.send(err)
             })
     }
-    static loginForm(req, res) {
-        res.render('/login')
+    static formLogin(req, res) {
+        res.render('login')
     }
     static postLogin(req, res) {
-        const { username, password } = req.body
+        const { userName, email, password } = req.body
 
-        User.findOne({ where: { username } })
+        User.findOne({ where: { userName,email } })
             .then(user => {
                 if (user) {
                     const isValidPassword = bcrypt.compareSync(password, user.password)

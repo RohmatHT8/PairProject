@@ -3,6 +3,7 @@ const app = express()
 const port = process.env.PORT || 3000
 const path = require('path');
 const session = require('express-session');
+const route = require('./routes')
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
@@ -15,14 +16,12 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: false,//karena masih development false aja dl
+        secure: false,
         sameSite: true
     }
 }))
 
-app.get('/', (req, res) => {
-    res.render('home')
-})
+app.use('/', route)
 
 
 

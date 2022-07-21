@@ -1,8 +1,8 @@
 const express = require('express');
 const route = express.Router();
-const isLoggedIn = require('../middlewares/auth');
-
-route.get('/')
+const routeUser = require('./user')
 
 
+route.use('/', routeUser)
 
+module.exports = route

@@ -1,0 +1,18 @@
+<nav class="navbar navbar-dark bg-dark sticky-top">
+    <div class="container col-6">
+      <div>
+        <a class="navbar-brand">8ook<span style="color:red;">Art</span></a>
+      </div>
+      <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-warning" type="submit">Search</button>
+       </form>
+
+       <% const arr = [] %> 
+       <% if(arr.length === 0){ %>
+        <a href="/login" style="color:white; text-decoration:none;">Login</a>
+        <% } else { %>
+          <a href="/login" style="color:red; text-decoration:none;">Logout</a>
+       <% } %> 
+    </div>
+</nav>
