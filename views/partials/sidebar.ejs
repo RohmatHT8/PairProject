@@ -10,17 +10,16 @@
       <br>
       <h4><%=user.fullName()%></h4>
       <div><%=user.formatDate%></div>
-      <div>Jumlah Postingan : 0</div>
       <% } %> 
 
       <% if(!user.Profile){%>
-        <a href="/addProfile/<%=user.id%>">Add Profile</a>
+        <a href="/addProfile">Add Profile</a>
       <% } else { %>
-        <a href="/profile/<%=user.id%>">Edit Profile</a>
+        <a href="/profile">Edit Profile</a>
       <% } %> 
 
-      <a href="/addPost/<%=user.id%>">Add Post</a>
-      <p><a href="/managePost/<%=user.id%>">Manage Post</a></p> 
+      <a href="/addPost">Add Post</a>
+      <p><a href="/managePost">Manage Post</a></p> 
 
       <a href="/logout" class="btn btn-danger">Log Out</a>
   </div>

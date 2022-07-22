@@ -12,7 +12,34 @@
           
           <!-- left side bar -->
             <div class="col">
-                <%- include('./partials/sidebar', user) %> 
+              <div class="sidebar">
+                <h1>Wellcome To 8ook<span style="color:#ff2525">Art</span>  Social Media</h1>
+            
+                <% if(!user.Profile){ %>
+                    <p>Belum Ada Profile</p>
+                <% } else { %>
+                  <div class="frame-photo mx-auto">
+                    <img src="/<%=user.Profile.profilePicture%>" alt="<%=user.fullName()%>" width="100%">
+                  </div>
+                  <br>
+                  <h4><%=user.fullName()%></h4>
+                  <div><%=user.formatDate%></div>
+           
+                  <div>Jumlah Postingan : <%=count%></div>
+         
+                  <% } %> 
+            
+                  <% if(!user.Profile){%>
+                    <a href="/addProfile">Add Profile</a>
+                  <% } else { %>
+                    <a href="/profile">Edit Profile</a>
+                  <% } %> 
+            
+                  <a href="/addPost">Add Post</a>
+                  <p><a href="/managePost">Manage Post</a></p> 
+            
+                  <a href="/logout" class="btn btn-danger">Log Out</a>
+              </div> 
             </div>
           <!-- end left side bar -->
 

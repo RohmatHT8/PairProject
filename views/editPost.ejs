@@ -14,7 +14,7 @@
                 <div class="mt-5" style="width: 80%;">
                     
                  <h1>Edit Post</h1>
-                  <form action="/managePost/<%=user.id%>/edit/<%= post.id %>" method="post">
+                  <form action="/managePost/edit/<%= post.id %>" method="post">
                                      
                     <div class="mb-3 col">
                       <label for="title" class="form-label">Title</label>
@@ -40,7 +40,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-warning">Post</button>
-                    <a class="btn btn-danger">Cancel</a>
+                    <a href="/managePost" class="btn btn-danger">Cancel</a>
                   </form>
                 </div>
             </div>

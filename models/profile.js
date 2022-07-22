@@ -18,10 +18,46 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Profile.init({
-    displayName: DataTypes.STRING,
-    profilePicture: DataTypes.STRING,
-    dateOfBirth: DataTypes.DATE,
-    UserId: DataTypes.INTEGER
+    displayName: {type: DataTypes.STRING,
+    allowNull:false,
+  validate:{
+    notNull:{
+      msg:`Display name cannot be NULL`
+    },
+    notEmpty:{
+      msg:`Display name cannot be EMPTY`
+    }
+  }},
+    profilePicture: {type: DataTypes.STRING,
+    allowNull:false,
+  validate:{
+    notNull:{
+      msg:`Profile picture cannot be NULL`
+    },
+    notEmpty:{
+      msg:`Profile picture cannot be EMPTY`
+    }
+  }},
+    dateOfBirth: {type: DataTypes.DATE,
+    allowNull:false,
+  validate:{
+    notNull:{
+      msg:`Date of Birth cannot be NULL`
+    },
+    notEmpty:{
+      msg:`Date of Birth cannot be EMPTY`
+    }
+  }},
+    UserId: {type: DataTypes.INTEGER,
+    allowNull:false,
+  validate:{
+    notNull:{
+      msg:`User Id cannot be NULL`
+    },
+    notEmpty:{
+      msg:`User Id cannot be EMPTY`
+    }
+  }}
   }, {
     sequelize,
     modelName: 'Profile',

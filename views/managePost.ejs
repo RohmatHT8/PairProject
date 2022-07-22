@@ -38,8 +38,8 @@
                           <td><%=getTime(el.createdAt)%></td>
                           <td><% el.like %> </td>
                           <td>
-                              <a href="/managePost/<%= el.User.id %>/edit/<%= el.id %>" class="btn btn-warning">Edit Post</a>
-                              <a href="/managePost/<%= el.User.id %>/delete/<%= el.id %>" class="btn btn-danger">Delete</a>
+                              <a href="/managePost/edit/<%= el.id %>" class="btn btn-warning">Edit Post</a>
+                              <a href="/managePost/delete/<%= el.id %>" class="btn btn-danger">Delete</a>
                           </td>
                         </tr>
                       <% }) %> 

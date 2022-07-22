@@ -13,7 +13,16 @@
             <div class="col-6 ms-5">
                 <div class="mt-5" style="width: 80%;">
                   <h1>Add Profile</h1>
-                  <form action="/addProfile/<%=user.id%>" method="post" enctype="multipart/form-data">
+
+                  <% if(errors) {%>
+                    <div class="p-2 rounded-1" style="color:rgb(249, 12, 12); background-color: rgb(255, 195, 195);">
+                      <% errors.split(',').forEach(el => {%>
+                         <div ><%= el %> </div>
+                      <% }) %> 
+                    </div>
+                   <% } %>
+
+                  <form action="/addProfile" method="post" enctype="multipart/form-data">
                           <div class="mb-3 col">
                             <label for="userName" class="form-label">Display Name</label>
                             <input type="text" class="form-control" id="userName" name="displayName" >
